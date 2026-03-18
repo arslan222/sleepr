@@ -1,5 +1,5 @@
 steps:
-  # Build the reservations service
+  # Build the reservations service and push to GCR
   - name: 'gcr.io/cloud-builders/docker'
     args:
       [
@@ -14,7 +14,7 @@ steps:
     args:
       ['push', 'us-east4-docker.pkg.dev/sleepr-490610/reservations/production']
 
-  # Build the auth service
+  # Build the auth service and push to GCR
   - name: 'gcr.io/cloud-builders/docker'
     args:
       [
@@ -28,7 +28,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-east4-docker.pkg.dev/sleepr-490610/auth/production']
 
-  # Build the payments service
+  # Build the payments service and push to GCR
   - name: 'gcr.io/cloud-builders/docker'
     args:
       [
@@ -42,7 +42,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-east4-docker.pkg.dev/sleepr-490610/payments/production']
 
-  # Build the notifications service
+  # Build the notifications service and push to GCR
   - name: 'gcr.io/cloud-builders/docker'
     args:
       [
