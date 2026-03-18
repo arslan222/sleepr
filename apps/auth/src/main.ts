@@ -12,8 +12,8 @@ async function bootstrap() {
   app.connectMicroservice({
     transport: Transport.TCP,
     options: {
-      host: configService.get('AUTH_HOST'),
-      port: configService.get('AUTH_PORT'),
+      host: configService.getOrThrow<string>('AUTH_HOST'),
+      port: configService.getOrThrow<number>('AUTH_PORT'),
     },
   });
   app.use(cookieParser());
@@ -24,6 +24,7 @@ async function bootstrap() {
   );
   app.useLogger(app.get(Logger));
   await app.startAllMicroservices();
-  await app.listen(configService.get('PORT') as number);
+  const port = configService.getOrThrow<number>('PORT');
+  await app.listen(port);
 }
 bootstrap();
