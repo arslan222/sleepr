@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: notifications
+  name: notifications
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notifications
+  template:
+    metadata:
+      labels:
+        app: notifications
+    spec:
+      containers:
+        - image: us-east4-docker.pkg.dev/sleepr-490610/notifications/production
+          name: notifications
+          env:
+            - name: NOTIFICATIONS_PORT
+              value: '3000'
+            - name: NOTIFICATIONS_HOST
+              value: '0.0.0.0'
+            - name: EMAIL_USER
+              value: 'arslanqurashi222@gmail.com'
+            - name: OAUTH_CLIENT_ID
+              value: '249344743176-c7j0dah5hs4n8akuesqpa7ih029su3af.apps.googleusercontent.com'
+            - name: OAUTH_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: google
+                  key: oauthClientSecret
+            - name: OAUTH_REFRESH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: google
+                  key: oauthRefreshToken
+          ports:
+            - containerPort: 3000

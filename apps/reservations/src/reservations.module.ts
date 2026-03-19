@@ -11,6 +11,7 @@ import { LoggerModule } from '@app/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import Joi from 'joi';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { HealthModule } from '@app/common';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         inject: [ConfigService],
       },
     ]),
+    HealthModule,
   ],
 
   controllers: [ReservationsController],

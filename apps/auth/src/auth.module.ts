@@ -10,6 +10,7 @@ import Joi from 'joi';
 import { PassportModule } from '@nestjs/passport';
 import { LocalStrategy } from './strategies/local-strategy';
 import { JwtStrategy } from './strategies/jwt-strategy';
+import { HealthModule } from '@app/common';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { JwtStrategy } from './strategies/jwt-strategy';
         PORT: Joi.number().required(),
       }),
     }),
+    HealthModule,
   ],
   controllers: [AuthController],
   providers: [AuthService, LocalStrategy, JwtStrategy],
